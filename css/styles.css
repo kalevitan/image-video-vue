@@ -1,0 +1,25 @@
+.filters {
+  padding: 2rem 0;
+}
+.filter {
+  display: inline-block;
+  padding-right: 1rem;
+}
+.list-group-item span {
+  padding-right: 8px;
+}
+.images-videos .card {
+  margin-bottom: 1rem;
+}
+.jumbotron {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  margin-bottom: 0;
+  background-color: #fff;
+}
+.album {
+  min-height: 50rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  background-color: #f7f7f7;
+}

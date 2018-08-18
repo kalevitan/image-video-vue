@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+
+  <body>
+    <main>
+
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1>Images &amp; Videos Gallery</h1>
+          <p class="text-muted text-center">
+            Welcome to the Image &amp; Video Gallery demo application. This album is built using VueJS and Bootstrap frameworks.<br />
+            The content below is being pulled from a rest endpoint using the vue-resource plugin.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <div id="app">
+          <image-gallery></image-gallery>
+        </div>
+      </section>
+
+
+      <template id="images-videos">
+        <!-- We need this root wrapper element-->
+        <div class="images-videos">
+          <section class="filters">
+            <div class="container">
+
+              <div class="row">
+                <div class="col">
+                  <div class="alert alert-primary" v-if="loading"><span>Content is loading. Please wait...</span></div>
+
+                  <form>
+                    <div class="row align-items-end">
+                      <div class="form-group col-12 col-sm-4 filter filter--type">
+                        <label for="filterByType">Filter by Type</label>
+                        <select id="filterByType" class="form-control custom-select" v-model="typeFilter">
+                          <option value="any" selected>Any</option>
+                          <option value="Images">Images</option>
+                          <option value="Videos">Videos</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-12 col-sm-4 filter fitler--tag">
+                        <label for="filterByTag">Filter by Tags</label>
+                        <select id="filterByTag" class="form-control custom-select" v-model="tagFilter">
+                          <option value="all" selected>All</option>
+                          <option value="El Nino">El Nino</option>
+                          <option value="Fire">Fire</option>
+                          <option value="Sea Ice">Sea Ice</option>
+                          <option value="Wind">Wind</option>
+                        </select>
+                      </div>
+                      <div class="form-group col">
+                        <button type="reset" class="btn btn-primary" @click="resetData()">Reset</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <section class="album text-muted">
+            <div class="container">
+              <div class="row" v-for="group in filterNodes">
+                <div class="col-12 col-sm-6 col-md-3" v-for="item in group">
+                  <div class="card">
+                    <img v-bind:src="item.uri" class="card-img-top" style="max-width: 100%;"/>
+                    <div class="card-body">
+                      <h4 class="card-title">{{ item.title }}</h4>
+                      <p class="card-text"><small class="text-muted">{{ item.created }}</small></p>
+                      <a v-bind:href="item.nid" class="card-link">Read More</a>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">
+                        <span class="oi oi-aperture"></span>{{ item.type }}
+                      </li>
+                      <li class="list-group-item">
+                        <span class="oi oi-tags"></span>{{ item.field_tags }}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div><!--.images-videos wrapper-->
+      </template>
+
+    </main>
+
+    <script src="js/vue.js"></script>
+    <script src="js/vue-router.js"></script>
+    <script src="js/vue-resource.js"></script>
+    <script src="js/app.js"></script>
+
+  </body>
+</html>
